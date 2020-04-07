@@ -42,3 +42,19 @@ p1.join()
 p2.join()
 print("Multiprocessing ellapsed time ", time.time() - startime)
 # print(out_list[:10]) is not availlable
+
+import multiprocessing
+import time
+size = int(size / 100)
+# Number of numbers to add
+# Sharing requires specific mecanism
+out_list = multiprocessing.Manager().list()
+p1 = multiprocessing.Process(target=list_append, args=(size, 1, out_list))
+p2 = multiprocessing.Process(target=list_append, args=(size, -1, out_list))
+startime = time.time()
+p1.start()
+p2.start()
+p1.join()
+p2.join()
+print(out_list[:10])
+print("Multiprocessing with shared object ellapsed time ", time.time() - startime)
