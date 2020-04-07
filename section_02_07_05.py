@@ -27,4 +27,18 @@ thread2.start()
 thread1.join()
 thread2.join()
 print("Threading ellapsed time ", time.time() - startime)
-print(out_list[:2000])
+print(out_list[-10:])
+
+import multiprocessing
+# Sharing requires specific mecanism
+out_list1 = multiprocessing.Manager().list()
+p1 = multiprocessing.Process(target=list_append, args=(size, 1, None))
+out_list2 = multiprocessing.Manager().list()
+p2 = multiprocessing.Process(target=list_append, args=(size, -1, None))
+startime = time.time()
+p1.start()
+p2.start()
+p1.join()
+p2.join()
+print("Multiprocessing ellapsed time ", time.time() - startime)
+# print(out_list[:10]) is not availlable
