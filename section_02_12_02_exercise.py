@@ -12,6 +12,7 @@ def delete_adj_duplicates(li):
     for ii in li:
         if ii != previous:
             result.append(ii)
+        previous = ii
     return result
 def delete_all_duplicates(li):
     previous = set()
