@@ -45,10 +45,7 @@ def to_file():
         fd = open(filename, "r")
         for line in fd:
             for word in regex.findall(line.lower()):
-                if not word in count:
-                    count[word] = 1
-                else:
-                    count[word] += 1
+                count[word] = count.get(word, 0) + 1
     fd = open(options.output, "w")
     # Pandas
     df = pd.DataFrame([[k, count[k]] for k in count], columns=["word", "count"])
