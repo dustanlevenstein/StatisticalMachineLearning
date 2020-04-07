@@ -21,7 +21,7 @@ def numpy_and_scipy_1_1_4():
 def matplotlib_1_1_4():
     import numpy as np
     import matplotlib.pyplot as plt
-    x = np.linspace(0, 10, 50)
+    x = np.linspace(0, 10, 10)
     sinus = np.sin(x)
     plt.plot(x, sinus)
     plt.show()
