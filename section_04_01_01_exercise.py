@@ -12,7 +12,7 @@ Created on Thu Apr  9 12:43:15 2020
 import numpy as np
 
 size = 10
-x = np.random.normal(1.78, .1, size=size)
+x = np.random.normal(1.78, 1, size=size)
 y = np.random.normal(1.66, .1, size=size)
 
 xbar = np.sum(x)/size
