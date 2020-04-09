@@ -29,3 +29,15 @@ import seaborn as sns
 sns.regplot(x="experience", y="salary", data=salary)
 plt.show()
 
+def SS(x, y):
+    ybar = np.mean(y)
+    SS_tot = np.sum((y-ybar)*(y-ybar))
+    beta, beta0, r_value, p_value, std_err = stats.linregress(x,y)
+    yhat = beta * x + beta0
+    SS_reg = np.sum((yhat-ybar)*(yhat-ybar))
+    SS_res = np.sum((y-yhat)*(y-yhat))
+    return SS_tot, SS_reg, SS_res
+
+SS_tot, SS_reg, SS_res = SS(x, y)
+epsilon = 10**(-6)
+assert (SS_tot -( SS_reg + SS_res)) < epsilon
