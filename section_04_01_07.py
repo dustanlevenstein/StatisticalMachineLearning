@@ -85,3 +85,5 @@ twoway.t_test('experience')
 # Post-hoc is salary of Master different salary of Ph.D?
 # ie. t-test salary of Master = salary of Ph.D.
 print(twoway.t_test('education[T.Master] = education[T.Ph.D]'))
+
+## Where is the p-value in these tests??
