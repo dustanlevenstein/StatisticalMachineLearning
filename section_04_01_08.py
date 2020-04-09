@@ -46,12 +46,12 @@ plt.show()
 
 # My attempt to picture what's going on here.
 
-from matplotlib.patches import Rectangle
 
-Rectangle((0, 0), 100, 100)
-plt.fill(0, 0, "g")
-plt.fill(100, 0, 1000, 0, 1000, 100, 100, 100, "r")
-plt.plot(100, 0, 100, 100, marker=None)
-plt.plot(0, 50, 1000, 50, marker=None)
+ax = plt.gca()
+ax.set_aspect("equal", "box")
+ax.add_patch(plt.Rectangle((0, 0), 100, 100, facecolor = "red", edgecolor = "red"))
+ax.add_patch(plt.Rectangle((100, 0), 900, 100, facecolor = "green", edgecolor = "green"))
+plt.plot(100, 0, 100, 100, marker='o', color='black')
+plt.plot(0, 50, 1000, 50, marker='o', color='black')
 
 plt.show()
