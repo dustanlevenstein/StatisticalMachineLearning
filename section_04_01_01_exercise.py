@@ -20,4 +20,7 @@ xycov = np.sum((x-xbar)*(y-ybar))/9
 
 xbar_auto = np.mean(x)
 xstd_auto = np.std(x, ddof=1)
-xycov_auto = np.cov([x,y], ddof=1)
+xycov_auto = np.cov([x,y], ddof=1)[0][1]
+assert xbar == xbar_auto
+assert xstd == xstd_auto
+assert xycov == xycov_auto
