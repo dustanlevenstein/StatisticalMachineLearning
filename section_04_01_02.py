@@ -32,4 +32,7 @@ plt.plot(cvalues, chi2.pdf(cvalues, 1), 'b-', label="Chi2(1)")
 plt.plot(cvalues, chi2.pdf(cvalues, 5), 'r-', label="Chi2(5)")
 plt.plot(cvalues, chi2.pdf(cvalues, 30), 'g-', label="Chi2(30)")
 plt.legend()
+
+#sample_chi2 = np.random.chisquare(1, 10)
+#sns.distplot(sample_chi2)
 plt.show()
