@@ -19,5 +19,5 @@ ybar = np.sum(y)/10
 xycov = np.sum((x-xbar)*(y-ybar))/9
 
 xbar_auto = np.mean(x)
-xstd_auto = np.std(x)
-xycov_auto = np.cov([x,y])
+xstd_auto = np.std(x, ddof=1)
+xycov_auto = np.cov([x,y], ddof=1)
