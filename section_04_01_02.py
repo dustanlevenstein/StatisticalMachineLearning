@@ -37,6 +37,8 @@ plt.legend()
 #sns.distplot(sample_chi2)
 plt.show()
 
+# F-distribution
+
 from scipy.stats import f
 fvalues = np.linspace(.1, 5, 100)
 # pdf(x, df1, df2): Probability density function at x of F.
@@ -57,6 +59,8 @@ low_proba_fvalues = fvalues[fvalues > f_at_proba_inf_95]
 plt.fill_between(low_proba_fvalues, 0, f.pdf(low_proba_fvalues, 1, 30),
                  alpha=.8, label="P < 0.05")
 plt.show()
+
+# t-distribution
 
 from scipy.stats import t
 
