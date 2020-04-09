@@ -68,3 +68,8 @@ print(aov)
 print(twoway.compare_f_test(oneway)) # p-value low I assume means that
                                      # education is a statistically significant
                                      # independent variable.
+
+
+
+print(twoway.model.data.param_names)
+print(twoway.model.data.exog[:10, :])
