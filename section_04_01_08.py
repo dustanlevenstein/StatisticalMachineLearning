@@ -63,3 +63,12 @@ ax.yaxis.set_major_locator(ticker.FixedLocator([0, 50, 100]))
 plt.title("Visualization of Y numpy array")
 
 plt.show()
+
+TP = np.sum(pvals[:n_info ] < 0.05) # True Positives
+FP = np.sum(pvals[n_info: ] < 0.05) # False Positives
+TN = np.sum(pvals[n_info: ] >= 0.05) # True Positives
+FN = np.sum(pvals[:n_info ] >= 0.05) # False Positives
+
+import pandas as pd
+df = pd.DataFrame([[TP, TN], [FP, FN]], columns = ["P", "N"], index = ['T', 'F'])
+print(df)
