@@ -29,7 +29,7 @@ plt.fill_between(upper_succes_tvalues, 0,
                  scipy.stats.binom.pmf(upper_succes_tvalues, 100, 0.5),
                  alpha=.8, label="p-value")
 _ = plt.legend()
-pval = 1 - scipy.stats.binom.cdf(60, 100, 0.5)
+pval = 1 - scipy.stats.binom.cdf(59.5, 100, 0.5)
 print(pval)
 plt.show()
 
