@@ -57,3 +57,11 @@ low_proba_fvalues = fvalues[fvalues > f_at_proba_inf_95]
 plt.fill_between(low_proba_fvalues, 0, f.pdf(low_proba_fvalues, 1, 30),
                  alpha=.8, label="P < 0.05")
 plt.show()
+
+from scipy.stats import t
+
+tvalues = np.linspace(-4, 4, 100)
+plt.plot(tvalues, t.pdf(tvalues, 4), label="t-dist (df=4)")
+plt.plot(tvalues, norm.pdf(tvalues), label="standard normal")
+plt.legend()
+plt.show()
