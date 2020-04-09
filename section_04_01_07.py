@@ -73,3 +73,15 @@ print(twoway.compare_f_test(oneway)) # p-value low I assume means that
 
 print(twoway.model.data.param_names)
 print(twoway.model.data.exog[:10, :])
+
+
+
+# t-test of the specific contribution of experience:
+ttest_exp = twoway.t_test([0, 0, 0, 0, 1])
+ttest_exp.pvalue, ttest_exp.tvalue
+print(ttest_exp)
+# Alternatively, you can specify the hypothesis tests using a string
+twoway.t_test('experience')
+# Post-hoc is salary of Master different salary of Ph.D?
+# ie. t-test salary of Master = salary of Ph.D.
+print(twoway.t_test('education[T.Master] = education[T.Ph.D]'))
