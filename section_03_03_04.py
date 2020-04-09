@@ -20,6 +20,8 @@ sns.boxplot(x="management", y="salary", hue="education", data=salary)
 sns.stripplot(x="management", y="salary", hue="education", data=salary,
               jitter=True, dodge=True, linewidth=1)
 
+### Density plot with one figure containing multiple axis
+# One figure can contain several axis, whose contain the graphic elements
 # Set up the matplotlib figure: 3 x 1 axis
 f, axes = plt.subplots(3, 1, figsize=(9, 9), sharex=True)
 i = 0
@@ -32,3 +34,8 @@ for edu, d in salary.groupby(['education']):
     axes[i].set_ylabel('Density')
     i += 1
 ax = plt.legend()
+plt.show()
+
+
+# Violin plot
+ax = sns.violinplot(x="salary", data=salary)
