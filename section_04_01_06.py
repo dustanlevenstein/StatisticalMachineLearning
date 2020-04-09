@@ -57,7 +57,7 @@ np.random.seed(seed=42) # make the example reproducible
 N, P = 50, 4
 X = np.random.normal(size= N * P).reshape((N, P))
 ## Our model needs an intercept so we add a column of 1s:
-X[:, 0] = 1
+X[:, 0] = 1 # THIS DELETES A COLUMN!!!
 print(X[:5, :])
 betastar = np.array([10, 1., .5, 0.1])
 e = np.random.normal(size=N)
