@@ -66,9 +66,30 @@ plt.show()
 
 TP = np.sum(pvals[:n_info ] < 0.05) # True Positives
 FP = np.sum(pvals[n_info: ] < 0.05) # False Positives
-TN = np.sum(pvals[n_info: ] >= 0.05) # True Positives
-FN = np.sum(pvals[:n_info ] >= 0.05) # False Positives
+TN = np.sum(pvals[n_info: ] >= 0.05) # True Negatives
+FN = np.sum(pvals[:n_info ] >= 0.05) # False Negatives
 
 import pandas as pd
 df = pd.DataFrame([[TP, TN], [FP, FN]], columns = ["P", "N"], index = ['T', 'F'])
-print(df)
+print("No correction:\n", df, sep="")
+
+import statsmodels.sandbox.stats.multicomp as multicomp
+_, pvals_fwer, _, _ = multicomp.multipletests(pvals, alpha=0.05,
+                                              method='bonferroni')
+TP = np.sum(pvals_fwer[:n_info ] < 0.05) # True Positives
+FP = np.sum(pvals_fwer[n_info: ] < 0.05) # False Positives
+TN = np.sum(pvals_fwer[n_info: ] >= 0.05) # True Negatives
+FN = np.sum(pvals_fwer[:n_info ] >= 0.05) # False Negatives
+df = pd.DataFrame([[TP, TN], [FP, FN]], columns = ["P", "N"], index = ['T', 'F'])
+print("FWER correction:\n", df, sep="")
+
+
+import statsmodels.sandbox.stats.multicomp as multicomp
+_, pvals_fdr, _, _ = multicomp.multipletests(pvals, alpha=0.05,
+                                              method='fdr_bh')
+TP = np.sum(pvals_fdr[:n_info ] < 0.05) # True Positives
+FP = np.sum(pvals_fdr[n_info: ] < 0.05) # False Positives
+TN = np.sum(pvals_fdr[n_info: ] >= 0.05) # True Negatives
+FN = np.sum(pvals_fdr[:n_info ] >= 0.05) # False Negatives
+df = pd.DataFrame([[TP, TN], [FP, FN]], columns = ["P", "N"], index = ['T', 'F'])
+print("FDR correction:\n", df, sep="")
