@@ -38,4 +38,4 @@ plt.show()
 
 
 # Violin plot
-ax = sns.violinplot(x="salary", data=salary, bw=.15)
+ax = sns.violinplot(x="management", y="salary", hue="education", data=salary)
