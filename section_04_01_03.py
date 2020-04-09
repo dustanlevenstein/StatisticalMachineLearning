@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 succes = np.linspace(30, 70, 41)
 plt.plot(succes, scipy.stats.binom.pmf(succes, 100, 0.5), 'b-',
          label="Binomial(100, 0.5)")
-upper_succes_tvalues = succes[succes > 60]
+upper_succes_tvalues = succes[succes >= 60]
 plt.fill_between(upper_succes_tvalues, 0,
                  scipy.stats.binom.pmf(upper_succes_tvalues, 100, 0.5),
                  alpha=.8, label="p-value")
