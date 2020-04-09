@@ -29,3 +29,7 @@ epsilon = 10**(-10)
 assert abs(xbar - xbar_auto) < epsilon
 assert abs(xstd - xstd_auto) < epsilon
 assert abs(xycov - xycov_auto) < epsilon
+
+w, v = np.linalg.eigh(xycov_matrix)
+print(w) # eigenvalues in ascending order
+print(v) # columns are eigenvectors
