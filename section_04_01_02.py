@@ -21,3 +21,15 @@ plt.plot(x, norm.pdf(x, mu, sigma))
 sample_normal = np.random.normal(0, sigma, 100)
 sns.distplot(sample_normal)
 plt.show()
+
+
+
+# Chi square distribution
+
+cvalues = np.linspace(.1, 5, 100)
+from scipy.stats import chi2
+plt.plot(cvalues, chi2.pdf(cvalues, 1), 'b-', label="Chi2(1)")
+plt.plot(cvalues, chi2.pdf(cvalues, 5), 'r-', label="Chi2(5)")
+plt.plot(cvalues, chi2.pdf(cvalues, 30), 'g-', label="Chi2(30)")
+plt.legend()
+plt.show()
