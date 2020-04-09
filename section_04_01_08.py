@@ -46,12 +46,20 @@ plt.show()
 
 # My attempt to picture what's going on here.
 
-
+import matplotlib.ticker as ticker
 ax = plt.gca()
 ax.set_aspect("equal", "box")
-ax.add_patch(plt.Rectangle((0, 0), 100, 100, facecolor = "red", edgecolor = "red"))
-ax.add_patch(plt.Rectangle((100, 0), 900, 100, facecolor = "green", edgecolor = "green"))
-plt.plot((100, 100), (0, 100), marker=None, color='black')
-plt.plot((0, 1000), (50, 50), marker=None, color='black')
-plt.text(10, 65, "+snr")
+r1 = ax.add_patch(plt.Rectangle((0, 0), 100, 100, facecolor = "red", edgecolor = "red"))
+r2 = ax.add_patch(plt.Rectangle((100, 0), 900, 100, facecolor = "green", edgecolor = "green"))
+ax.plot((100, 100), (0, 100), marker=None, color='black')
+ax.plot((0, 1000), (50, 50), marker=None, color='black')
+ax.text(10, 65, "+snr")
+ax.text(-50, 65, "g1")
+ax.text(-50, 15, "g2")
+ax.text(10, -35, 'pos', color="red")
+ax.text(500, -35, 'negatives', color="green")
+ax.xaxis.set_major_locator(ticker.FixedLocator([0, 100, 1000]))
+ax.yaxis.set_major_locator(ticker.FixedLocator([0, 50, 100]))
+plt.title("Visualization of Y numpy array")
+
 plt.show()
