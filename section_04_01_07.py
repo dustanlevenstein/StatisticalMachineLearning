@@ -32,3 +32,18 @@ print(model.summary())
 ypred = model.predict(X)
 # residuals + prediction == true values
 assert np.all(ypred + model.resid == y)
+
+
+import pandas as pd
+
+import statsmodels.formula.api as smfrmla
+df = pd.DataFrame(np.column_stack([X, y]), columns=['inter', 'x1','x2', 'x3', 'y'])
+print(df.columns, df.shape)
+# Build a model excluding the intercept, it is implicit
+model = smfrmla.ols("y~x1 + x2 + x3", df).fit()
+print(model.summary())
+
+
+
+
+import matplotlib.pyplot as plt
