@@ -41,3 +41,9 @@ def SS(x, y):
 SS_tot, SS_reg, SS_res = SS(x, y)
 epsilon = 10**(-6)
 assert (SS_tot -( SS_reg + SS_res)) < epsilon
+
+x = np.random.random(100)
+y = x+np.random.randn()
+SS_tot, SS_reg, SS_res = SS(x, y)
+epsilon = 10**(-6)
+assert (SS_tot -( SS_reg + SS_res)) < epsilon
