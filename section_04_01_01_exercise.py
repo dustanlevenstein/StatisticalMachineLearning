@@ -10,5 +10,5 @@ Created on Thu Apr  9 12:43:15 2020
 #   of size 10.
 
 import numpy as np
-x = np.random.normal(size=10) * .1 + 1.78
-y = np.random.normal(size=10) * .1 + 1.66
+x = np.random.normal(1.78, .1, size=10)
+y = np.random.normal(1.66, .1, size=10)
