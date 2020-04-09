@@ -10,17 +10,20 @@ Created on Thu Apr  9 12:43:15 2020
 #   of size 10.
 
 import numpy as np
-x = np.random.normal(1.78, .1, size=10)
-y = np.random.normal(1.66, .1, size=10)
 
-xbar = np.sum(x)/10
-xstd = np.sqrt(np.sum((x-xbar)*(x-xbar))/9)
-ybar = np.sum(y)/10
-xycov = np.sum((x-xbar)*(y-ybar))/9
+size = 10
+x = np.random.normal(1.78, .1, size=size)
+y = np.random.normal(1.66, .1, size=size)
+
+xbar = np.sum(x)/size
+xstd = np.sqrt(np.sum((x-xbar)*(x-xbar))/(size-1))
+ybar = np.sum(y)/size
+xycov = np.sum((x-xbar)*(y-ybar))/(size-1)
 
 xbar_auto = np.mean(x)
 xstd_auto = np.std(x, ddof=1)
-xycov_auto = np.cov([x,y], ddof=1)[0][1]
+xycov_matrix = np.cov([x,y], ddof=1)
+xycov_auto = xycov_matrix[0][1]
 
 epsilon = 10**(-10)
 assert abs(xbar - xbar_auto) < epsilon
