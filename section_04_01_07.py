@@ -47,3 +47,24 @@ print(model.summary())
 
 
 import matplotlib.pyplot as plt
+url = 'https://raw.github.com/neurospin/pystatsml/master/datasets/salary_table.csv'
+salary = pd.read_csv(url)
+
+
+oneway = smfrmla.ols('salary ~ management + experience', salary).fit()
+print(oneway.summary())
+aov = sm.stats.anova_lm(oneway, typ=2) # Type 2 ANOVA DataFrame
+print(aov)
+
+
+
+
+twoway = smfrmla.ols('salary ~ education + management + experience', salary).fit()
+print(twoway.summary())
+aov = sm.stats.anova_lm(twoway, typ=2) # Type 2 ANOVA DataFrame
+print(aov)
+
+
+print(twoway.compare_f_test(oneway)) # p-value low I assume means that
+                                     # education is a statistically significant
+                                     # independent variable.
