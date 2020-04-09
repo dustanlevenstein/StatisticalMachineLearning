@@ -41,3 +41,17 @@ axis[2].set_xlabel("p-value histogram")
 axis[2].set_ylabel("density")
 axis[2].legend()
 plt.tight_layout()
+plt.show()
+
+
+# My attempt to picture what's going on here.
+
+from matplotlib.patches import Rectangle
+
+Rectangle((0, 0), 100, 100)
+plt.fill(0, 0, "g")
+plt.fill(100, 0, 1000, 0, 1000, 100, 100, 100, "r")
+plt.plot(100, 0, 100, 100, marker=None)
+plt.plot(0, 50, 1000, 50, marker=None)
+
+plt.show()
