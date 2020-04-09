@@ -21,6 +21,9 @@ Y[grp=="g1", :n_info] += snr
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 tvals, pvals = np.full(n_features, np.NAN), np.full(n_features, np.NAN)
+
+# Okay, I see we're testing whether g1 and g2 have the same mean, depending on
+# which column of the randn box we're looking at.
 for j in range(n_features):
     tvals[j], pvals[j] = stats.ttest_ind(Y[grp=="g1", j], Y[grp=="g2", j],
                                          equal_var=True)
