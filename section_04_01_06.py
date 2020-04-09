@@ -47,3 +47,22 @@ y = x+np.random.randn()
 SS_tot, SS_reg, SS_res = SS(x, y)
 epsilon = 10**(-6)
 assert (SS_tot -( SS_reg + SS_res)) < epsilon
+
+
+
+from scipy import linalg
+np.random.seed(seed=42) # make the example reproducible
+
+# Dataset
+N, P = 50, 4
+X = np.random.normal(size= N * P).reshape((N, P))
+## Our model needs an intercept so we add a column of 1s:
+X[:, 0] = 1
+print(X[:5, :])
+betastar = np.array([10, 1., .5, 0.1])
+e = np.random.normal(size=N)
+y = np.dot(X, betastar) + e
+# Estimate the parameters
+Xpinv = linalg.pinv2(X)
+betahat = np.dot(Xpinv, y)
+print("Estimated beta:\n", betahat)
