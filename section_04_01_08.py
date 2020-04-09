@@ -10,8 +10,8 @@ import numpy as np
 np.random.seed(seed=42) # make example reproducible
 # Dataset
 n_samples, n_features = 100, 1000
-n_info = int(n_features/10) # number of features with information
-n1, n2 = int(n_samples/2), n_samples - int(n_samples/2)
+n_info = n_features//10 # number of features with information
+n1, n2 = n_samples//2, n_samples - n_samples//2
 snr = .5
 Y = np.random.randn(n_samples, n_features)
 grp = np.array(["g1"] * n1 + ["g2"] * n2)
