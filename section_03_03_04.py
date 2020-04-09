@@ -61,3 +61,4 @@ g.map_diag(plt.hist)
 g.map_offdiag(plt.scatter)
 ax = g.add_legend()
 plt.show()
+# I'm not clear on what that last one is showing me.
