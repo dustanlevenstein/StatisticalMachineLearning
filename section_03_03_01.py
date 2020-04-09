@@ -16,3 +16,8 @@ plt.xlabel("this is x factorial")
 plt.ylabel("this is y!")
 plt.title("Hello woild!")
 plt.show()
+
+plt.plot(x, sinus, label="sinus", color='blue', linestyle='--', linewidth=2) # I notice there's no documentation on plot.
+plt.plot(x, cosinus, label="cosinus", color='red', linestyle='-', linewidth=2)
+plt.legend()
+plt.show()
