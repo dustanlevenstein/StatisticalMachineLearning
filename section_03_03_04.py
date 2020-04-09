@@ -37,6 +37,27 @@ ax = plt.legend()
 plt.show()
 
 
-# Violin plot
+# Violin plot without breakdown by management.
 salary["Human"] = "Y"
 ax = sns.violinplot(x = 'Human', y="salary", hue="education", data=salary)
+
+plt.show()
+
+# Tips dataset.
+tips = sns.load_dataset("tips")
+print(tips.head())
+ax = sns.violinplot(x=tips["total_bill"])
+plt.show()
+# group by day
+ax = sns.violinplot(x="day", y="total_bill", data=tips, palette="muted")
+plt.show()
+# group by day and color by time
+ax = sns.violinplot(x="day", y="total_bill", hue="time", data=tips,
+                    palette="muted", split=True)
+
+# Pairwise scatterplots.
+g = sns.PairGrid(salary, hue="management")
+g.map_diag(plt.hist)
+g.map_offdiag(plt.scatter)
+ax = g.add_legend()
+plt.show()
