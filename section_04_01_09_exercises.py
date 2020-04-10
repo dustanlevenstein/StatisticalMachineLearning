@@ -10,5 +10,5 @@ import pandas as pd
 
 
 def simple_linear_regression_and_correlation():
-    df = pd.read_csv("ftp://ftp.cea.fr/pub/unati/people/educhesnay/pystatml/datasets/birthwt.csv")
+    df = pd.read_csv("birthwt.csv")
     print(df.head())
