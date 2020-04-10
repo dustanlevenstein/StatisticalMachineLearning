@@ -113,3 +113,18 @@ def simple_linear_regression_maths():
     assert np.allclose(SS_reg+SS_res, SS_tot, atol=1e-05)
     Rsquared = SS_reg/SS_tot
     assert np.allclose(Rsquared, rvalue*rvalue, 1e-05)
+    n = len(y)
+    F = SS_reg/(SS_res/(n-2))
+    print("F:", F)
+    fvalues = np.linspace(10, 25, 100)
+    plt.plot(fvalues, stats.f.pdf(fvalues, 1, n-2))
+    upper_fvals = fvalues[fvalues >= F]
+    plt.fill_between(upper_fvals, 0, stats.f.pdf(upper_fvals, 1, n-2))
+    plt.xlabel("F values")
+    plt.ylabel("Density")
+    plt.title("F(1, {})".format(n-2))
+    plt.show()
+    p_val = 1-stats.f.cdf(F, 1, n-2)
+    print("F-test p-value:", p_val)
+    print("Linear regression p-value:", pvalue)
+    print("Difference:", p_val-pvalue)
