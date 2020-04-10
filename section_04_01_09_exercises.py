@@ -103,7 +103,8 @@ def simple_linear_regression_and_correlation():
     # As far as mother's age goes, there seems to be no correlation.
     
 def simple_linear_regression_maths():
-    df = pd.read_csv("https://raw.github.com/neurospin/pystatsml/master/datasets/salary_table.csv")
+    df = pd.read_csv("https://raw.github.com/neurospin/pystatsml/master/"
+                     "datasets/salary_table.csv")
     x = df['experience'].to_numpy()
     y = df['salary'].to_numpy()
     slope, intercept, rvalue, pvalue, stderr = stats.linregress(x, y)
@@ -178,15 +179,19 @@ def two_sample_t_test_maths():
     assert np.allclose(p_value_stats, 2*p_value_manual)
     
 def two_sample_t_test_application():
-    df = pd.read_csv('https://raw.github.com/neurospin/pystatsml/master/datasets/birthwt.csv')
+    df = pd.read_csv('https://raw.github.com/neurospin/pystatsml/master/'
+                     'datasets/birthwt.csv')
     print(df)
     
     print(df.describe().loc[["mean", "std"], :].transpose())
     sns.violinplot(x=df['smoke'], y=df['bwt'])
     plt.show()
-    statistic, p_value = stats.ttest_ind(df['bwt'][df['smoke']==0], df['bwt'][df['smoke']==1])
-    print("p-value for the effect of smoking on birth weight (assuming variances are equal):", p_value)
-    # p_value == 0.008666726371019062, so reject the null hypothesis that they have the same mean.
+    statistic, p_value = stats.ttest_ind(df['bwt'][df['smoke']==0],
+                                         df['bwt'][df['smoke']==1])
+    print("p-value for the effect of smoking on birth weight"
+          " (assuming variances are equal):", p_value)
+    # p_value == 0.008666726371019062, so reject the null hypothesis that they
+    # have the same mean.
 
 def two_sample_t_test_random_permutations():
     eps = np.random.randn(100) + 1 # N(1, 1)
@@ -239,7 +244,8 @@ def univar_stat(df, target, variables):
     return pd.DataFrame(rows, columns=['Variable', 'Test', 'Statistic',
                                        'p-value'])
 def univariate_associations_dev():
-    df = pd.read_csv("https://raw.githubusercontent.com/neurospin/pystatsml/master/datasets/salary_table.csv")
+    df = pd.read_csv("https://raw.githubusercontent.com/neurospin/pystatsml/"
+                     "master/datasets/salary_table.csv")
     result = univar_stat(df, 'salary', ['experience', 'education',
                                         'management'])
     print(result)
