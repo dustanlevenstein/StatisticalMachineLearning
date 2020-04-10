@@ -15,4 +15,4 @@ dependencies:
     - sympy==1.5.1
     - tensorflow==2.0.0
     - openpyxl==3.0.3
-
+    - xlrd==1.2.0
