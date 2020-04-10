@@ -7,7 +7,9 @@ Created on Thu Apr  9 18:37:29 2020
 """
 
 import pandas as pd
-
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
 
 def simple_linear_regression_and_correlation():
     df = pd.read_csv("birthwt.csv")
@@ -56,4 +58,15 @@ def simple_linear_regression_and_correlation():
 #     
 # 
 # =============================================================================
+    # 1. Test the association of mother’s age and birth weight using the
+    # correlation test and linear regeression.
+    x = df['lwt'].to_numpy()
+    y = df['bwt'].to_numpy()
+    # We start with Spearman correlation.
+    plt.plot(x, y, "bo")
+    plt.title("Birth weight and mother's weight")
+    plt.xlabel('mother\' weight')
+    plt.ylabel('baby\' weight')
+    cor, pval = stats.spearmanr(x, y)
+    print("Spearman cor test, cor: %.4f, pval: %.4f" % (cor, pval))
     
