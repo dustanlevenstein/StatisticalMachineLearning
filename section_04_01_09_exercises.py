@@ -168,7 +168,7 @@ def two_sample_t_test_maths():
     F_mean = F_sample.mean()
     F_std = F_sample.std(ddof=1)
     s = np.sqrt((M_std*M_std+F_std*F_std)/2)
-    T = (M_mean-F_mean)/(s*np.sqrt(2/9))
+    T = (M_mean-F_mean)/(s*np.sqrt(2/10))
     degs_freedom = 18
     p_value_manual = 1-stats.t.cdf(T, degs_freedom)
     statistic, p_value_stats = stats.ttest_ind(M_sample, F_sample)
