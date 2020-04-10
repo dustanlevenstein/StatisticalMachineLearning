@@ -299,4 +299,8 @@ def anova():
     for k in grp:
         y[label == k] = np.random.normal(mu_k[k], sd_k[k], n_k[k])
     # Compute with scipy
-    fval, pval = stats.f_oneway(y[label == 0], y[label == 1], y[label == 2])
+    y1, y2, y3 = y[label == 0], y[label == 1], y[label == 2]
+    fval, pval = stats.f_oneway(y1, y2, y3)
+    
+    
+    # The book didn't give the formula, so Wikipedia.
