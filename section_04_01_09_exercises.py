@@ -111,4 +111,5 @@ def simple_linear_regression_maths():
     SS_reg = np.sum((yhat-ybar)*(yhat-ybar))
     SS_res = np.sum((yhat-y)*(yhat-y))
     assert np.allclose(SS_reg+SS_res, SS_tot, atol=1e-05)
-    
+    Rsquared = SS_reg/SS_tot
+    assert np.allclose(Rsquared, rvalue*rvalue, 1e-05)
