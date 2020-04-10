@@ -176,3 +176,7 @@ def two_sample_t_test_maths():
     print("two-sided p-value:", 2*p_value_manual)
     print("p-value obtained via stats.ttest_ind:", p_value_stats)
     assert np.allclose(p_value_stats, 2*p_value_manual)
+    
+def two_sample_t_test_application():
+    df = pd.read_csv('https://raw.github.com/neurospin/pystatsml/master/datasets/birthwt.csv')
+    print(df)
