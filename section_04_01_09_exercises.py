@@ -180,3 +180,14 @@ def two_sample_t_test_maths():
 def two_sample_t_test_application():
     df = pd.read_csv('https://raw.github.com/neurospin/pystatsml/master/datasets/birthwt.csv')
     print(df)
+    
+    print(df.describe().loc[["mean", "std"], :].transpose())
+    sns.violinplot(x=df['smoke'], y=df['bwt'])
+    plt.show()
+    statistic, p_value = stats.ttest_ind(df['bwt'][df['smoke']==0], df['bwt'][df['smoke']==1])
+    print("p-value for the effect of smoking on birth weight (assuming variances are equal):", p_value)
+    # p_value == 0.008666726371019062, so reject the null hypothesis that they have the same mean.
+
+def two_sample_t_test_random_permutations():
+    y = np.random.randn(100) + 1 # N(1, 1)
+    
