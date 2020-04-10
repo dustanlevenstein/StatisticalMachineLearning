@@ -285,3 +285,18 @@ def multiple_comparisons():
     # array([  4,  11,  19,  20,  22,  25,  26,  32,  34,  35,  40,  42,  49,
     #         50,  55,  58,  61,  80,  86,  88,  92,  93,  94,  96, 130, 466,
     #        602, 701])
+
+
+def anova():
+    # dataset
+    mu_k = np.array([1, 2, 3])
+    sd_k = np.array([1, 1, 1])
+    n_k = np.array([10, 20, 30])
+    grp = [0, 1, 2]
+    n = np.sum(n_k)
+    label = np.hstack([[k] * n_k[k] for k in [0, 1, 2]])
+    y = np.zeros(n)
+    for k in grp:
+        y[label == k] = np.random.normal(mu_k[k], sd_k[k], n_k[k])
+    # Compute with scipy
+    fval, pval = stats.f_oneway(y[label == 0], y[label == 1], y[label == 2])
