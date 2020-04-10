@@ -189,5 +189,35 @@ def two_sample_t_test_application():
     # p_value == 0.008666726371019062, so reject the null hypothesis that they have the same mean.
 
 def two_sample_t_test_random_permutations():
-    y = np.random.randn(100) + 1 # N(1, 1)
+    eps = np.random.randn(100) + 1 # N(1, 1)
+    g = (np.linspace(0, 99, 100)//50).astype(int)
+    y = g+eps
+    def tstat(y, g):
+        sample_0 = y[g==0]
+        sample_1 = y[g==1]
+        return stats.ttest_ind(sample_0, sample_1)
+    print(tstat(y, g)[1])
+    
+    # I don't know if I've already met the intended requirement of "using
+    # random permutations", so I'll plot p_values and t-values for 10000
+    # instances of eps and g.
+    t_values = []
+    p_values = []
+    for ii in range(10000):
+        eps = np.random.randn(100) + 1 # N(1, 1)
+        y = g+eps
+        t, p = tstat(y, g)
+        t_values.append(t)
+        p_values.append(p)
+    sns.distplot(t_values, hist=False)
+    plt.xlabel("T-values")
+    plt.ylabel("Density")
+    plt.title("Distribution of t-values")
+    plt.show()
+
+    sns.distplot(p_values, hist=False)
+    plt.xlabel("p-values")
+    plt.ylabel("Density")
+    plt.title("Distribution of p-values")
+    plt.show()
     
