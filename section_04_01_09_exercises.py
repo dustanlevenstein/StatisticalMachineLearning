@@ -220,4 +220,27 @@ def two_sample_t_test_random_permutations():
     plt.ylabel("Density")
     plt.title("Distribution of p-values")
     plt.show()
-    
+
+from pandas.api.types import is_numeric_dtype
+def univar_stat(df, target, variables):
+    rows = []
+    for variable in variables:
+        if is_numeric_dtype(df[variable]):
+            cor, pval = stats.spearmanr(df[variable], df[target])
+            rows.append([variable, "Spearman", cor, pval])
+        else:
+            gb = df.groupby(variable)
+            groups = []
+            for group_name in gb.groups.keys():
+                groups.append(gb.get_group(group_name)[target])
+            fval, pval = stats.f_oneway(*groups)
+            rows.append([variable, "one way ANOVA", fval, pval])
+            
+    return pd.DataFrame(rows, columns=['Variable', 'Test', 'Statistic',
+                                       'p-value'])
+def univariate_associations_dev():
+    df = pd.read_csv("https://raw.githubusercontent.com/neurospin/pystatsml/master/datasets/salary_table.csv")
+    result = univar_stat(df, 'salary', ['experience', 'education',
+                                        'management'])
+    print(result)
+    return result
