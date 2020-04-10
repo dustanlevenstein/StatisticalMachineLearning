@@ -72,6 +72,27 @@ print(gm.head())
 brain_vol = pd.merge(pd.merge(pd.merge(demo, gm), wm), csf)
 assert brain_vol.shape == (808, 9)
 
+# In [3]: brain_vol.info()
+# <class 'pandas.core.frame.DataFrame'>
+# Int64Index: 761 entries, 0 to 765
+# Data columns (total 12 columns):
+#  #   Column          Non-Null Count  Dtype  
+# ---  ------          --------------  -----  
+#  0   participant_id  761 non-null    object 
+#  1   site            761 non-null    object 
+#  2   group           761 non-null    object 
+#  3   age             761 non-null    int64  
+#  4   sex             761 non-null    object 
+#  5   session         761 non-null    object 
+#  6   gm_vol          761 non-null    float64
+#  7   wm_vol          761 non-null    float64
+#  8   csf_vol         761 non-null    float64
+#  9   tiv_vol         761 non-null    float64
+#  10  gm_f            761 non-null    float64
+#  11  wm_f            761 non-null    float64
+# dtypes: float64(6), int64(1), object(5)
+# memory usage: 77.3+ KB
+
 ###############################################################################
 # **Drop rows with missing values**
 
@@ -197,6 +218,7 @@ sns.violinplot("site", "gm_f", data=brain_vol1)
 # Stats with scipy
 fstat, pval = scipy.stats.f_oneway(*[brain_vol1.gm_f[brain_vol1.site == s]
                                    for s in brain_vol1.site.unique()])
+# That list comprehension is clever.
 print("Oneway Anova gm_f ~ site F=%.2f, p-value=%E" % (fstat, pval))
 
 ###############################################################################
@@ -218,6 +240,8 @@ sns.lmplot("age", "gm_f", hue="group", data=brain_vol1)
 
 brain_vol1_ctl = brain_vol1[brain_vol1.group == "Control"]
 brain_vol1_pat = brain_vol1[brain_vol1.group == "Patient"]
+import matplotlib.pyplot as plt
+plt.show()
 
 ###############################################################################
 # Stats with scipy
