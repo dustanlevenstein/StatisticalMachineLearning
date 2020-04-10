@@ -10,6 +10,8 @@ import pandas as pd
 import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import linalg
 
 def simple_linear_regression_and_correlation():
     df = pd.read_csv("birthwt.csv")
@@ -128,3 +130,27 @@ def simple_linear_regression_maths():
     print("F-test p-value:", p_val)
     print("Linear regression p-value:", pvalue)
     print("Difference:", p_val-pvalue)
+    sns.regplot(x, y)
+    plt.show()
+    
+def multiple_regression():
+    np.random.seed(seed=42) # make the example reproducible
+    # Dataset
+    N, P = 50, 4
+    X = np.random.normal(size= N * P).reshape((N, P))
+    ## Our model needs an intercept so we add a column of 1s:
+    X[:, 0] = 1
+    print(X[:5, :])
+    betastar = np.array([10, 1., .5, 0.1])
+    e = np.random.normal(size=N)
+    y = np.dot(X, betastar) + e
+    # Estimate the parameters
+    Xpinv = linalg.pinv2(X)
+    betahat = np.dot(Xpinv, y)
+    print("Estimated beta:\n", betahat)
+    
+    print("Shape of X:", X.shape)
+    print("Shape of pinv(X):", Xpinv.shape)
+    yhat = np.dot(X, betahat)
+    MSE = np.sum((yhat-y)*(yhat-y))/len(y)
+    print("MSE:", MSE)
