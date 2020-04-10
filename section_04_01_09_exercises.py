@@ -154,3 +154,23 @@ def multiple_regression():
     yhat = np.dot(X, betahat)
     MSE = np.sum((yhat-y)*(yhat-y))/len(y)
     print("MSE:", MSE)
+    
+def two_sample_t_test_maths():
+    height = np.array([ 1.83, 1.83, 1.73, 1.82, 1.83,
+                       1.73,1.99, 1.85, 1.68, 1.87,
+                       1.66, 1.71, 1.73, 1.64, 1.70,
+                       1.60, 1.79, 1.73, 1.62, 1.77])
+    grp = np.array(["M"]*10+["F"]*10)
+    M_mean = height[grp=='M'].mean()
+    M_std = height[grp=='M'].std(ddof=1)
+    F_mean = height[grp=='F'].mean()
+    F_std = height[grp=='F'].std(ddof=1)
+    s = np.sqrt((9*M_std*M_std+9*F_std*F_std)/18)
+    T = (M_mean-F_mean)/(s*np.sqrt(2/9))
+    degs_freedom = 18
+    p_value_manual = 1-stats.t.cdf(T, degs_freedom)
+    statistic, p_value_stats = stats.ttest_ind(height[grp=='M'], height[grp=='F'])
+    print("p-value obtained by chugging the formulae:", p_value_manual)
+    print("two-sided p-value:", 2*p_value_manual)
+    print("p-value obtained via stats.ttest_ind:", p_value_stats)
+    assert np.allclose(p_value_stats, 2*p_value_manual)
