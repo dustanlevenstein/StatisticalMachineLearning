@@ -65,8 +65,13 @@ def simple_linear_regression_and_correlation():
     # We start with Spearman correlation.
     plt.plot(x, y, "bo")
     plt.title("Birth weight and mother's weight")
-    plt.xlabel('mother\' weight')
-    plt.ylabel('baby\' weight')
+    plt.xlabel("mother's weight")
+    plt.ylabel("baby's weight")
     cor, pval = stats.spearmanr(x, y)
     print("Spearman cor test, cor: %.4f, pval: %.4f" % (cor, pval))
+    cor, pval = stats.pearsonr(x, y) # Pearson test yields the linear
+                                     # regression correlation coefficient.
+    print("Pearson cor test, cor: %.4f, pval: %.4f" % (cor, pval))
+    beta, beta0, r_value, p_value, std_err = stats.linregress(x, y)
+    print("linear regression p-value is %.4f" % p_value)    
     
