@@ -161,15 +161,17 @@ def two_sample_t_test_maths():
                        1.66, 1.71, 1.73, 1.64, 1.70,
                        1.60, 1.79, 1.73, 1.62, 1.77])
     grp = np.array(["M"]*10+["F"]*10)
-    M_mean = height[grp=='M'].mean()
-    M_std = height[grp=='M'].std(ddof=1)
-    F_mean = height[grp=='F'].mean()
-    F_std = height[grp=='F'].std(ddof=1)
-    s = np.sqrt((9*M_std*M_std+9*F_std*F_std)/18)
+    M_sample = height[grp=='M']
+    F_sample = height[grp=='F']
+    M_mean = M_sample.mean()
+    M_std = M_sample.std(ddof=1)
+    F_mean = F_sample.mean()
+    F_std = F_sample.std(ddof=1)
+    s = np.sqrt((M_std*M_std+F_std*F_std)/2)
     T = (M_mean-F_mean)/(s*np.sqrt(2/9))
     degs_freedom = 18
     p_value_manual = 1-stats.t.cdf(T, degs_freedom)
-    statistic, p_value_stats = stats.ttest_ind(height[grp=='M'], height[grp=='F'])
+    statistic, p_value_stats = stats.ttest_ind(M_sample, F_sample)
     print("p-value obtained by chugging the formulae:", p_value_manual)
     print("two-sided p-value:", 2*p_value_manual)
     print("p-value obtained via stats.ttest_ind:", p_value_stats)
