@@ -299,8 +299,27 @@ def anova():
     for k in grp:
         y[label == k] = np.random.normal(mu_k[k], sd_k[k], n_k[k])
     # Compute with scipy
-    y1, y2, y3 = y[label == 0], y[label == 1], y[label == 2]
-    fval, pval = stats.f_oneway(y1, y2, y3)
+    y0, y1, y2 = y[label == 0], y[label == 1], y[label == 2]
+    fval, pval = stats.f_oneway(y0, y1, y2)
     
     
     # The book didn't give the formula, so Wikipedia.
+    k = len(n_k)
+    y0bar = y0.mean()
+    y1bar = y1.mean()
+    y2bar = y2.mean()
+    ybar = y.mean()
+    between_variance = (
+        n_k[0]*(y0bar-ybar)*(y0bar-ybar) + 
+        n_k[1]*(y1bar-ybar)*(y1bar-ybar) + 
+        n_k[2]*(y2bar-ybar)*(y2bar-ybar))/(k-1)
+    within_variance = (
+        np.sum((y0-y0bar)*(y0-y0bar)) +
+        np.sum((y1-y1bar)*(y1-y1bar)) +
+        np.sum((y2-y2bar)*(y2-y2bar)))/(n-k)
+    F = between_variance/within_variance
+    deg_freedom_1 = k-1
+    deg_freedom_2 = n-k
+    pval_manual = 1-stats.f.cdf(F, deg_freedom_1, deg_freedom_2)
+    assert np.allclose(F, fval)
+    assert np.allclose(pval, pval_manual)
