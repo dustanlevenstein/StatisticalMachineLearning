@@ -58,8 +58,7 @@ def simple_linear_regression_and_correlation():
 #     
 # 
 # =============================================================================
-    # 1. Test the association of mother’s age and birth weight using the
-    # correlation test and linear regeression.
+    print("Mother's weight and birth weight:")
     x = df['lwt'].to_numpy()
     y = df['bwt'].to_numpy()
     # We start with Spearman correlation.
@@ -73,5 +72,30 @@ def simple_linear_regression_and_correlation():
                                      # regression correlation coefficient.
     print("Pearson cor test, cor: %.4f, pval: %.4f" % (cor, pval))
     beta, beta0, r_value, p_value, std_err = stats.linregress(x, y)
-    print("linear regression p-value is %.4f" % p_value)    
+    print("linear regression p-value is %.4f" % p_value)
+    plt.show()
     
+
+    print("Mother's age and birth weight:")
+    x = df['age'].to_numpy()
+    y = df['bwt'].to_numpy()
+    # We start with Spearman correlation.
+    plt.plot(x, y, "bo")
+    plt.title("Birth weight and mother's age")
+    plt.xlabel("mother's age")
+    plt.ylabel("baby's weight")
+    cor, pval = stats.spearmanr(x, y)
+    print("Spearman cor test, cor: %.4f, pval: %.4f" % (cor, pval))
+    cor, pval = stats.pearsonr(x, y) # Pearson test yields the linear
+                                     # regression correlation coefficient.
+    print("Pearson cor test, cor: %.4f, pval: %.4f" % (cor, pval))
+    beta, beta0, r_value, p_value, std_err = stats.linregress(x, y)
+    print("linear regression p-value is %.4f" % p_value)
+    plt.show()
+    # Conclusion: Although there is a small but highly statistically
+    # significant correlation between the mother's weight and the baby's
+    # weight, the association between them is not linear. Moreover, looking at
+    # a scatterplot of data can be misleading, to say the least, since there is
+    # no apparent correlation in the scatterplot comparing weights.
+    
+    # As far as mother's age goes, there seems to be no correlation.
