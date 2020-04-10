@@ -250,3 +250,38 @@ def univariate_associations_dev():
                                         'management'])
     print(result)
     return result
+
+def multiple_comparisons():
+    # generating the dataset.
+    np.random.seed(seed=42) # make example reproducible
+    # Dataset
+    n_samples, n_features = 100, 1000
+    n_info = n_features//10 # number of features with information
+    n1, n2 = n_samples//2, n_samples - n_samples//2
+    snr = .5
+    Y = np.random.randn(n_samples, n_features)
+    grp = np.array(["g1"] * n1 + ["g2"] * n2)
+    # Add some group effect for Pinfo features
+    Y[grp=="g1", :n_info] += snr
+    #
+    tvals, pvals = np.full(n_features, np.NAN), np.full(n_features, np.NAN)
+    
+    # exercise.
+    mean_differences = Y[grp=="g1",:].mean(axis=0)-Y[grp=="g2",:].mean(axis=0)
+    assert len(mean_differences) == n_features
+    s_1s = Y[grp=="g1",:].std(axis=0)
+    assert len(s_1s) == n_features
+    s_2s = Y[grp=='g2',:].std(axis=0)
+    s_combined = np.sqrt((s_1s*s_1s*(n1-1)+s_2s*s_2s*(n2-1))/(n1+n2-2))
+    Ts = mean_differences/(s_combined*np.sqrt(1/n1+1/n2))
+    degrees_freedom = n1+n2-2
+    p_values = 1-stats.t.cdf(Ts, degrees_freedom)
+    return Ts, p_values
+
+    # In [135]: Ts, p_values = multiple_comparisons()
+    # In [136]: indices = np.arange(1000)
+    # In [137]: indices[p_values < 1/900]
+    # Out[137]: 
+    # array([  4,  11,  19,  20,  22,  25,  26,  32,  34,  35,  40,  42,  49,
+    #         50,  55,  58,  61,  80,  86,  88,  92,  93,  94,  96, 130, 466,
+    #        602, 701])
