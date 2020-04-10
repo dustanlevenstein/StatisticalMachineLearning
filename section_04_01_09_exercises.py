@@ -99,3 +99,16 @@ def simple_linear_regression_and_correlation():
     # no apparent correlation in the scatterplot comparing weights.
     
     # As far as mother's age goes, there seems to be no correlation.
+    
+def simple_linear_regression_maths():
+    df = pd.read_csv("https://raw.github.com/neurospin/pystatsml/master/datasets/salary_table.csv")
+    x = df['experience'].to_numpy()
+    y = df['salary'].to_numpy()
+    slope, intercept, rvalue, pvalue, stderr = stats.linregress(x, y)
+    ybar = np.sum(y)/len(y)
+    SS_tot = np.sum((y-ybar)*(y-ybar))
+    yhat = intercept + slope*x
+    SS_reg = np.sum((yhat-ybar)*(yhat-ybar))
+    SS_res = np.sum((yhat-y)*(yhat-y))
+    assert np.allclose(SS_reg+SS_res, SS_tot, atol=1e-05)
+    
