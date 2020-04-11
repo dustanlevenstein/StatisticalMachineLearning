@@ -28,11 +28,22 @@ cmap = sns.color_palette("RdBu_r", 11)
 _ = sns.heatmap(corr, mask=None, cmap=cmap, vmax=1, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5})
 
+plt.show()
+
+
 # Observation: the correlation between cyl and disp and the correlation
 # between cyl and hp is 1, but the correlation between disp and hp is not one.
 
+corr_truncated = corr.loc[['cyl', 'disp', 'hp'], ['cyl', 'disp', 'hp']]
+
+f, ax = plt.subplots(figsize=(5.5, 4.5))
+cmap = sns.color_palette("RdBu_r", 11)
+# Draw the heatmap with the mask and correct aspect ratio
+_ = sns.heatmap(corr_truncated, mask=None, cmap=cmap, vmax=1, center=0,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
 
 plt.show()
+
 
 # convert correlation to distances
 d = 2 * (1 - np.abs(corr))
