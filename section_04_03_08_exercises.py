@@ -38,3 +38,17 @@ plt.show()
 np.random.seed(42)
 
 X = np.random.random((100, 2, 1))*4-2
+x_coords = X[:,0,0]
+y_coords = X[:,1,0]
+
+ax = plt.gca()
+arrow1 = plt.arrow(0, 0, a[0,0], a[1, 0], head_width=.1, color=colors[0],
+                   label="a")
+arrow2 = plt.arrow(0, 0, b[0,0], b[1, 0], head_width=.1, color=colors[1],
+                   label="b")
+plt.xlim(-3, 3)
+plt.ylim(-3, 3)
+ax.set_aspect('equal', 'box')
+plt.legend([arrow1, arrow2], ['a', 'b'])
+plt.scatter(x_coords, y_coords, color=colors[2], marker=".")
+plt.show()
