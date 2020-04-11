@@ -37,7 +37,7 @@ plt.show()
 
 np.random.seed(42)
 
-numpoints = 100
+numpoints = 100000
 X = np.random.random((numpoints, 2, 1))*4-2
 x_coords = X[:,0,0]
 y_coords = X[:,1,0]
