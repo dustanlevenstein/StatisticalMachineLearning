@@ -24,11 +24,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 colors = sns.color_palette()
 
-plt.arrow(0, 0, a[0,0], a[1, 0], head_width=.1, color=colors[0], label="a")
-plt.arrow(0, 0, b[0,0], b[1, 0], head_width=.1, color=colors[1], label="b")
+ax = plt.gca()
+arrow1 = plt.arrow(0, 0, a[0,0], a[1, 0], head_width=.1, color=colors[0],
+                   label="a")
+arrow2 = plt.arrow(0, 0, b[0,0], b[1, 0], head_width=.1, color=colors[1],
+                   label="b")
 plt.xlim(-3, 3)
 plt.ylim(-3, 3)
-plt.legend()
+ax.set_aspect('equal', 'box')
+plt.legend([arrow1, arrow2], ['a', 'b'])
 plt.show()
 
 np.random.seed(42)
