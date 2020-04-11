@@ -84,3 +84,114 @@ assert np.all((diet.diff() == diet - diet.shift())[1:])
 df.diff().plot()
 plt.xlabel('Year')
 plt.show()
+
+
+
+df.plot()
+plt.xlabel('Year');
+print(df.corr())
+
+sns.heatmap(df.corr(), cmap="coolwarm")
+plt.show()
+
+
+
+
+df.diff().plot()
+plt.xlabel('Year');
+
+print(df.diff().corr())
+sns.heatmap(df.diff().corr(), cmap="coolwarm")
+plt.show()
+
+
+
+
+
+from statsmodels.tsa.seasonal import seasonal_decompose
+
+x = gym
+
+x = x.astype(float) # force float
+decomposition = seasonal_decompose(x)
+trend = decomposition.trend
+seasonal = decomposition.seasonal
+residual = decomposition.resid
+
+plt.subplot(411)
+plt.plot(x, label='Original')
+plt.legend(loc='best')
+plt.subplot(412)
+plt.plot(trend, label='Trend')
+plt.legend(loc='best')
+plt.subplot(413)
+plt.plot(seasonal,label='Seasonality')
+plt.legend(loc='best')
+plt.subplot(414)
+plt.plot(residual, label='Residuals')
+plt.legend(loc='best')
+plt.tight_layout()
+plt.show()
+
+
+
+# from pandas.plotting import autocorrelation_plot
+from pandas.plotting import autocorrelation_plot
+
+x = df["diet"].astype(float)
+autocorrelation_plot(x)
+plt.show()
+
+
+
+
+from statsmodels.tsa.stattools import acf
+
+x_diff = x.diff().dropna() # first item is NA
+lag_acf = acf(x_diff, nlags=36)
+plt.plot(lag_acf)
+plt.title('Autocorrelation Function')
+plt.show()
+
+
+
+
+
+
+from statsmodels.tsa.stattools import acf, pacf
+
+x = df["gym"].astype(float)
+
+x_diff = x.diff().dropna() # first item is NA
+# ACF and PACF plots:
+
+lag_acf = acf(x_diff, nlags=20)
+lag_pacf = pacf(x_diff, nlags=20, method='ols')
+
+#Plot ACF:
+plt.subplot(121)
+plt.plot(lag_acf)
+plt.axhline(y=0,linestyle='--',color='gray')
+plt.axhline(y=-1.96/np.sqrt(len(x_diff)),linestyle='--',color='gray')
+plt.axhline(y=1.96/np.sqrt(len(x_diff)),linestyle='--',color='gray')
+plt.title('Autocorrelation Function  (q=1)')
+
+#Plot PACF:
+plt.subplot(122)
+plt.plot(lag_pacf)
+plt.axhline(y=0,linestyle='--',color='gray')
+plt.axhline(y=-1.96/np.sqrt(len(x_diff)),linestyle='--',color='gray')
+plt.axhline(y=1.96/np.sqrt(len(x_diff)),linestyle='--',color='gray')
+plt.title('Partial Autocorrelation Function (p=1)')
+plt.tight_layout()
+plt.show()
+
+from statsmodels.tsa.arima_model import ARMA
+
+model = ARMA(x, order=(1, 1)).fit() # fit model
+
+print(model.summary())
+plt.plot(x)
+plt.plot(model.predict(), color='red')
+plt.title('RSS: %.4f'% sum((model.fittedvalues-x)**2))
+plt.show()
