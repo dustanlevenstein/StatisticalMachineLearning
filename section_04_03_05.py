@@ -23,7 +23,8 @@ print("# Partial correlations:")
 Pcor = np.zeros(Prec.shape)
 Pcor[::] = np.NaN
 
-for i, j in zip(*np.triu_indices_from(Prec, 1)):
-    Pcor[i, j] = - Prec[i, j] / np.sqrt(Prec[i, i] * Prec[j, j])
+for i in range(len(Prec)):
+    for j in range(len(Prec)):
+        Pcor[i, j] = - Prec[i, j] / np.sqrt(Prec[i, i] * Prec[j, j])
 
 print(Pcor.round(2))
