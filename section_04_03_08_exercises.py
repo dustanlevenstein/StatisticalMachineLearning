@@ -37,7 +37,8 @@ plt.show()
 
 np.random.seed(42)
 
-X = np.random.random((100, 2, 1))*4-2
+numpoints = 100
+X = np.random.random((numpoints, 2, 1))*4-2
 x_coords = X[:,0,0]
 y_coords = X[:,1,0]
 
@@ -53,8 +54,8 @@ plt.legend([arrow1, arrow2], ['a', 'b'])
 plt.scatter(x_coords, y_coords, color=colors[2], marker=".")
 plt.show()
 
-X_norms = euclidean(X, axis=1).reshape(100)
-X_projections_on_a = ((a.T@X).reshape(100)/X_norms)
+#X_norms = euclidean(X, axis=1).reshape(numpoints)
+X_projections_on_a = ((a.T@X).reshape(numpoints)/euclidean(a))
 print("Projections onto a:", X_projections_on_a)
 
 sns.distplot(X_projections_on_a, bins=20)
