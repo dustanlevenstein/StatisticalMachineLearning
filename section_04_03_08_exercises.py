@@ -75,7 +75,7 @@ def covariance_matrix_and_m_norm():
     Xcov = ((X-Xbar.T).T@(X-Xbar.T))/(numpoints-1)
     print("Xcov:\n", Xcov, "\ncompared to true cov\n", Sigma)
     Sinv = scipy.linalg.inv(Sigma)
-    distances = np.zeros((100,2))
+    distances = np.zeros((numpoints,2))
     distances[::] = np.NaN
     for ii, x in enumerate(X):
         distances[ii, 0] = euclidean(x-Xbar)
@@ -91,7 +91,3 @@ def covariance_matrix_and_m_norm():
 
 def mahalanobis(x, xbar, Sinv):
     return np.sqrt((x-xbar).T@(Sinv)@(x-xbar))
-    
-    
-df = covariance_matrix_and_m_norm()
-    
