@@ -8,8 +8,8 @@ Created on Sat Apr 11 11:51:09 2020
 
 import numpy as np
 
-a = np.array([[2], [1]])
-b = np.array([[1], [1]])
+a = np.array([[1], [1]])
+b = np.array([[2], [1]])
 
 def euclidean(x, axis=0):
     return np.sqrt(np.sum(x*x, axis=axis))
