@@ -56,3 +56,6 @@ plt.show()
 X_norms = euclidean(X, axis=1).reshape(100)
 X_projections_on_a = ((a.T@X).reshape(100)/X_norms)
 print("Projections onto a:", X_projections_on_a)
+
+sns.distplot(X_projections_on_a, bins=20)
+plt.show()
