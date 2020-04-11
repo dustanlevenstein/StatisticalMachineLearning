@@ -78,3 +78,8 @@ plt.text(-6.1, 3.5,
 plt.axis('equal')
 print('Euclidian   d(m, x1) = %.2f < d(m, x2) = %.2f' % (d2_m_x1, d2_m_x2))
 print('Mahalanobis d(m, x1) = %.2f > d(m, x2) = %.2f' % (dm_m_x1, dm_m_x2))
+
+# So the upshot here is the covariance ellipse becomes the unit ball under the
+# Mahalanobis metric. The covariance ellipse, it should be emphasized, is the
+# image of the Euclidean unit ball under the SQUARE ROOT of the covariance
+# matrix.
