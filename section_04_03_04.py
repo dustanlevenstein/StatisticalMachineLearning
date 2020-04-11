@@ -65,3 +65,9 @@ f, ax = plt.subplots(figsize=(5.5, 4.5))
 _ = sns.heatmap(R, mask=None, cmap=cmap, vmax=1, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5})
 plt.show()
+
+
+
+
+# Question: do the distances form a valid metric space?
+
