@@ -11,17 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Plot appears on its own windows
-%matplotlib inline
-# Tools / Preferences / Ipython Console  / Graphics  / Graphics Backend / Backend: “automatic”
-# Interactive Matplotlib Jupyter Notebook
-# %matplotlib inline
-
-try:
-    url = "https://raw.githubusercontent.com/datacamp/datacamp_facebook_live_ny_resolution/master/datasets/multiTimeline.csv"
-    df = pd.read_csv(url, skiprows=2)
-except:
-    df = pd.read_csv("../datasets/multiTimeline.csv", skiprows=2)
+df = pd.read_csv("multiTimeline.csv", skiprows=2)
 
 print(df.head())
 
