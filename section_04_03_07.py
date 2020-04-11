@@ -30,7 +30,9 @@ sigma = np.array([[1, -.5],
 
 # x, y grid
 x, y = np.mgrid[-3:3:.1, -3:3:.1]
-X = np.stack((x.ravel(), y.ravel())).T
+X = np.stack((x.ravel(), y.ravel())).T # That's a lot of work to get what is
+                                       # effectively an lexicographic
+                                       # enumeration of ordered pairs.
 norm = multivariate_normal_pdf(X, mu, sigma).reshape(x.shape)
 
 # Do it with scipy
