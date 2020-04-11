@@ -12,8 +12,7 @@ warnings.filterwarnings("ignore")
 import numpy as np
 import scipy
 import matplotlib.pyplot as plt
-import seaborn as sns
-import pystatsml.plot_utils
+import plot_utils
 import seaborn as sns  # nice color
 
 np.random.seed(42)
@@ -50,7 +49,7 @@ for i in range(len(mean)):
     plt.scatter(mean[i][0], mean[i][1], marker="o", s=200, facecolors='w',
                 edgecolors=colors[i], linewidth=2)
     # Ellipses representing the covariance matrices
-    pystatsml.plot_utils.plot_cov_ellipse(Cov[i], pos=mean[i], facecolor='none',
+    plot_utils.plot_cov_ellipse(Cov[i], pos=mean[i], facecolor='none',
                                           linewidth=2, edgecolor=colors[i])
 
 plt.axis('equal')
