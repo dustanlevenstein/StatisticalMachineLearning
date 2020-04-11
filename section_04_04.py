@@ -39,3 +39,39 @@ plt.xlabel('Year', fontsize=20);
 
 plt.show()
 
+diet = df['diet']
+
+diet_resamp_yr = diet.resample('A').mean()
+diet_roll_yr = diet.rolling(12).mean()
+
+ax = diet.plot(alpha=0.5, style='-') # store axis (ax) for latter plots
+diet_resamp_yr.plot(style=':', label='Resample at year frequency', ax=ax)
+diet_roll_yr.plot(style='--', label='Rolling average (smooth), window size=12', ax=ax)
+ax.legend()
+plt.show()
+
+
+x = np.asarray(df[['diet']])
+win = 12
+win_half = int(win / 2)
+# print([((idx-win_half), (idx+win_half)) for idx in np.arange(win_half, len(x))])
+
+diet_smooth = np.array([x[(idx-win_half):(idx+win_half)].mean() for idx in np.arange(win_half, len(x))])
+plt.plot(diet_smooth)
+plt.show()
+
+
+gym = df['gym']
+
+df_avg = pd.concat([diet.rolling(12).mean(), gym.rolling(12).mean()], axis=1)
+df_avg.plot()
+plt.xlabel('Year')
+plt.show()
+
+
+# They detrend by removing the running average.
+
+df_dtrend = df[["diet", "gym"]] - df_avg
+df_dtrend.plot()
+plt.xlabel('Year')
+plt.show()
