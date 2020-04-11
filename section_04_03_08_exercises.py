@@ -54,7 +54,6 @@ plt.legend([arrow1, arrow2], ['a', 'b'])
 plt.scatter(x_coords, y_coords, color=colors[2], marker=".")
 plt.show()
 
-#X_norms = euclidean(X, axis=1).reshape(numpoints)
 X_projections_on_a = ((a.T@X).reshape(numpoints)/euclidean(a))
 print("Projections onto a:", X_projections_on_a)
 
