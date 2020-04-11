@@ -28,7 +28,7 @@ print("Euclidean norm of ones=%.2f. Mahalanobis norm of ones=%.2f" % (d_euc, d_m
 import scipy
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pystatsml.plot_utils
+import plot_utils
 np.random.seed(40)
 colors = sns.color_palette()
 
@@ -45,7 +45,7 @@ plt.scatter(x1[0], x1[1], color=colors[1], s=200, label="x1")
 plt.scatter(x2[0], x2[1], color=colors[2], s=200, label="x2")
 
 # plot covariance ellipsis
-pystatsml.plot_utils.plot_cov_ellipse(Cov, pos=mean, facecolor='none', 
+plot_utils.plot_cov_ellipse(Cov, pos=mean, facecolor='none', 
                                       linewidth=2, edgecolor=colors[0])
 # Compute distances
 d2_m_x1 = scipy.spatial.distance.euclidean(mean, x1)
