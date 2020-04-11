@@ -20,3 +20,22 @@ df.columns = ['month', 'diet', 'gym', 'finance']
 
 # Describe
 print(df.describe())
+
+df.month = pd.to_datetime(df.month)
+df.set_index('month', inplace=True)
+
+print(df.head())
+
+df.plot()
+plt.xlabel('Year');
+plt.show()
+
+# change figure parameters
+df.plot(figsize=(20,10), linewidth=5, fontsize=20)
+plt.show()
+# Plot single column
+df[['diet']].plot(figsize=(20,10), linewidth=5, fontsize=20)
+plt.xlabel('Year', fontsize=20);
+
+plt.show()
+
