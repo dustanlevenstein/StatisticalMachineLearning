@@ -70,4 +70,17 @@ plt.show()
 
 
 # Question: do the distances form a valid metric space?
-
+# Testing triangle inequality
+def dist(a, b):
+    return d.loc[a,b]
+for x in R.index:
+    for y in R.index:
+        for z in R.index:
+            if dist(x, z) > dist(x, y) + dist(y, z):
+                print(("Triangle inequality failure:"
+                       " d({}, {}) > d({}, {}) + d({}, {})").format(
+                           x, z, x, y, y, z))
+                           
+# Answer: there are a plethora of triangle inequality failures.
+# For example,
+print(d.loc[['mpg', 'cyl', 'qsec'], ['mpg', 'cyl', 'qsec']])
