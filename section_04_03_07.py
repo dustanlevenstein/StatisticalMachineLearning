@@ -42,7 +42,7 @@ assert np.allclose(norm, norm_scpy)
 # Plot
 fig = plt.figure(figsize=(10, 7))
 ax = fig.gca(projection='3d')
-surf = ax.plot_surface(x, y, norm, rstride=3,
+surf = ax.plot_surface(x, y, norm, rstride=2,
         cstride=3, cmap=plt.cm.coolwarm,
         linewidth=1, antialiased=False
     )
