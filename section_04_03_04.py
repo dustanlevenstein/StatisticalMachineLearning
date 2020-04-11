@@ -43,6 +43,7 @@ _ = sns.heatmap(corr_truncated, mask=None, cmap=cmap, vmax=1, center=0,
             square=True, linewidths=.5, cbar_kws={"shrink": .5})
 
 plt.show()
+print(corr_truncated)
 
 
 # convert correlation to distances
