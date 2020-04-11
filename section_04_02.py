@@ -214,6 +214,7 @@ import seaborn as sns
 # Plot
 sns.violinplot("site", "gm_f", data=brain_vol1)
 
+
 ###############################################################################
 # Stats with scipy
 fstat, pval = scipy.stats.f_oneway(*[brain_vol1.gm_f[brain_vol1.site == s]
