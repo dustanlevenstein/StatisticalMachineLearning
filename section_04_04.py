@@ -75,3 +75,12 @@ df_dtrend = df[["diet", "gym"]] - df_avg
 df_dtrend.plot()
 plt.xlabel('Year')
 plt.show()
+
+
+# diff = original - shiftted data
+# (exclude first term for some implementation details)
+assert np.all((diet.diff() == diet - diet.shift())[1:])
+
+df.diff().plot()
+plt.xlabel('Year')
+plt.show()
