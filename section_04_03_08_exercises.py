@@ -11,8 +11,8 @@ import numpy as np
 a = np.array([[2], [1]])
 b = np.array([[1], [1]])
 
-def euclidean(x):
-    return np.sqrt(np.sum(x*x))
+def euclidean(x, axis=0):
+    return np.sqrt(np.sum(x*x, axis=axis))
 
 print(euclidean(a)) # should be sqrt(5)
 print(euclidean(a-b)) # should be 1
@@ -52,3 +52,7 @@ ax.set_aspect('equal', 'box')
 plt.legend([arrow1, arrow2], ['a', 'b'])
 plt.scatter(x_coords, y_coords, color=colors[2], marker=".")
 plt.show()
+
+X_norms = euclidean(X, axis=1).reshape(100)
+X_projections_on_a = ((a.T@X).reshape(100)/X_norms)
+print("Projections onto a:", X_projections_on_a)
