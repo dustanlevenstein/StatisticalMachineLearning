@@ -31,7 +31,7 @@ sigma = np.array([[1, -.5],
 # x, y grid
 x, y = np.mgrid[-3:3:.1, -3:3:.1]
 X = np.stack((x.ravel(), y.ravel())).T
-norm = multivariate_normal_pdf(X, mean, sigma).reshape(x.shape)
+norm = multivariate_normal_pdf(X, mu, sigma).reshape(x.shape)
 
 # Do it with scipy
 norm_scpy = multivariate_normal(mu, sigma).pdf(np.stack((x, y), axis=2))
