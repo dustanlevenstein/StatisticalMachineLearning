@@ -9,13 +9,16 @@ Created on Sat Apr 11 11:51:09 2020
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import scipy
+import pandas as pd
+
+def euclidean(x, axis=0):
+    return np.sqrt(np.sum(x*x, axis=axis))
 
 def dot_product_and_euclidean_norm():
     a = np.array([[2], [1]])
     b = np.array([[1], [1]])
     
-    def euclidean(x, axis=0):
-        return np.sqrt(np.sum(x*x, axis=axis))
     
     print(euclidean(a)) # should be sqrt(5)
     print(euclidean(a-b)) # should be 1
@@ -71,6 +74,24 @@ def covariance_matrix_and_m_norm():
     print("Xbar:", Xbar, "compared to true mean of", Mu)
     Xcov = ((X-Xbar.T).T@(X-Xbar.T))/(numpoints-1)
     print("Xcov:\n", Xcov, "\ncompared to true cov\n", Sigma)
+    Sinv = scipy.linalg.inv(Sigma)
+    distances = np.zeros((100,2))
+    distances[::] = np.NaN
+    for ii, x in enumerate(X):
+        distances[ii, 0] = euclidean(x-Xbar)
+        distances[ii, 1] = mahalanobis(x, Xbar, Sinv)
+    df = pd.DataFrame(distances, columns = ['Euclidean', 'Mahalanobis'])
+
+    sns.distplot(df['Euclidean'], bins=20)
+    plt.show()
+    sns.distplot(df['Mahalanobis'], bins=20)
+    plt.show()
+
+    return df
+
+def mahalanobis(x, xbar, Sinv):
+    return np.sqrt((x-xbar).T@(Sinv)@(x-xbar))
     
-covariance_matrix_and_m_norm()
+    
+df = covariance_matrix_and_m_norm()
     
