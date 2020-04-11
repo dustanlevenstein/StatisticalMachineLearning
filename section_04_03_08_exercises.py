@@ -63,12 +63,14 @@ def dot_product_and_euclidean_norm():
     
 def covariance_matrix_and_m_norm():
     Mu = np.array([1, 1])
-    Sigma = np.array([[1, .8], [.8, .8]])
+    Sigma = np.array([[1, .8], [.8, 1]])
     numpoints = 100
+    np.random.seed(42)
     X = np.random.multivariate_normal(Mu, Sigma, size=numpoints)
-    print(X)
     Xbar = X.mean(axis=0)
     print("Xbar:", Xbar, "compared to true mean of", Mu)
+    Xcov = ((X-Xbar.T).T@(X-Xbar.T))/(numpoints-1)
+    print("Xcov:\n", Xcov, "\ncompared to true cov\n", Sigma)
     
 covariance_matrix_and_m_norm()
     
