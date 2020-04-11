@@ -25,16 +25,16 @@ Cov[0] = np.array([[1, 0],
                    [0, 1]])
 
 mean[1] = np.array([3.5, 3.5])
-Cov[1] = np.array([[1, .5],
-                   [.5, 1]])
+Cov[1] = np.array([[2, .5],
+                   [.5, 1.2]])
 
 mean[2] = np.array([-3.5, -3.5])
-Cov[2] = np.array([[1, .9],
-                   [.9, 1]])
+Cov[2] = np.array([[1.4, .9],
+                   [.9, .6]])
 
 mean[3] = np.array([3.5, -3.5])
 Cov[3] = np.array([[1, -.9],
-                   [-.9, 1]])
+                   [-.9, 2]])
 
 # Generate dataset
 for i in range(len(mean)):
