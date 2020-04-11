@@ -44,7 +44,7 @@ fig = plt.figure(figsize=(10, 7))
 ax = fig.gca(projection='3d')
 surf = ax.plot_surface(x, y, norm, rstride=2,
         cstride=3, cmap=plt.cm.coolwarm,
-        linewidth=1, antialiased=False
+        linewidth=1, antialiased=True
     )
 
 ax.set_zlim(0, 0.2)
