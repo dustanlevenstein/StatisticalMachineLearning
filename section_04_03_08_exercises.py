@@ -18,4 +18,4 @@ print(euclidean(a)) # should be sqrt(5)
 print(euclidean(a-b)) # should be 1
 
 
-print((a.T @ b)/euclidean(a))
+print(((a.T @ b)/euclidean(a))[0,0])
