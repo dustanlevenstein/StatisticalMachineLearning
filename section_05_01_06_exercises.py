@@ -118,3 +118,28 @@ plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
 plt.axis('equal')
 plt.tight_layout()
 plt.show()
+
+from sklearn.cluster import AgglomerativeClustering
+
+model = AgglomerativeClustering(n_clusters=3)
+
+yhat = model.fit_predict(X)
+ac_colors = list(map(lambda x: ['g', 'r', 'b'][x], yhat))
+
+plt.subplot(121)
+plt.scatter(PC[:, 0], PC[:, 1], c=colors)
+plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
+plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
+plt.axis('equal')
+plt.tight_layout()
+plt.title("True classifications")
+
+plt.subplot(122)
+plt.scatter(PC[:, 0], PC[:, 1], c=ac_colors)
+plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
+plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
+plt.axis('equal')
+plt.tight_layout()
+plt.title("AgglomerativeClustering classifications")
+
+plt.show()
