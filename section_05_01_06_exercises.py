@@ -30,17 +30,15 @@ class BasicPCA(object):
         
         self.explained_variance_ratio_ = list(eigenvalues/eigenvalues.sum())
         self.pc_directions = eigenvectors
-    def transform(self, num_components=None):
+    def transform(self, X=None, num_components=None):
         if num_components is None:
             num_components = self.numcomponents
             if num_components is None:
                 num_components = 2
-        else:
-            self.data = X
-            self.fit()
-        
-        # TODO
-
+        if X is None:
+            X = self.data
+        return (X-self.mean) @ self.pc_directions[:num_components]
+ 
 import matplotlib.pyplot as plt
 
 np.random.seed(42)
@@ -55,15 +53,15 @@ pca = BasicPCA(n_components=2)
 pca.fit(X)
 print(pca.explained_variance_ratio_)
 
-# PC = pca.transform(X)
+PC = pca.transform(X)
 
-# plt.subplot(121)
-# plt.scatter(X[:, 0], X[:, 1])
-# plt.xlabel("x1"); plt.ylabel("x2")
+plt.subplot(121)
+plt.scatter(X[:, 0], X[:, 1])
+plt.xlabel("x1"); plt.ylabel("x2")
 
-# plt.subplot(122)
-# plt.scatter(PC[:, 0], PC[:, 1])
-# plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
-# plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
-# plt.axis('equal')
-# plt.tight_layout()
+plt.subplot(122)
+plt.scatter(PC[:, 0], PC[:, 1])
+plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
+plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
+plt.axis('equal')
+plt.tight_layout()
