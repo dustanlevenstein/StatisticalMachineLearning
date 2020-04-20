@@ -140,6 +140,29 @@ plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
 plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
 plt.axis('equal')
 plt.tight_layout()
-plt.title("AgglomerativeClustering classifications")
+plt.title("AC classifications")
+
+plt.show()
+
+
+PC_all = pca.transform(num_components=4)
+yhat = model.fit_predict(PC_all)
+ac_colors = list(map(lambda x: ['g', 'r', 'b'][x], yhat))
+
+plt.subplot(121)
+plt.scatter(PC[:, 0], PC[:, 1], c=colors)
+plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
+plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
+plt.axis('equal')
+plt.tight_layout()
+plt.title("True classifications")
+
+plt.subplot(122)
+plt.scatter(PC[:, 0], PC[:, 1], c=ac_colors)
+plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
+plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
+plt.axis('equal')
+plt.tight_layout()
+plt.title("PCA AC classifications")
 
 plt.show()
