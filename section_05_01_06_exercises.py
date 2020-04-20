@@ -28,10 +28,6 @@ class BasicPCA(object):
         eigenvectors = np.flip(eigenvectors, axis=1)
         eigenvalues = np.flip(eigenvalues)
         
-        # An adjustment solely for the purpose of making this match the results
-        # of section_05_01_03.py.
-        eigenvectors[:,0] = -eigenvectors[:,0]
-        
         self.explained_variance_ratio_ = list(eigenvalues/eigenvalues.sum())
         self.pc_directions = eigenvectors
     def transform(self, X=None, num_components=None):
@@ -41,7 +37,7 @@ class BasicPCA(object):
                 num_components = 2
         if X is None:
             X = self.data
-        return (X-self.mean) @ self.pc_directions[:num_components]
+        return (X-self.mean) @ self.pc_directions[:,:num_components]
 
 import pandas as pd
 data = pd.read_csv("iris.csv")
@@ -78,3 +74,16 @@ plt.show()
 # correlated together, while sepal_width is somewhat negatively correlated with
 # the others.
 # =============================================================================
+pca = BasicPCA()
+pca.fit(X)
+ev = pca.explained_variance_ratio_
+print(pca.explained_variance_ratio_)
+print([ev[0], ev[0]+ev[1], ev[0]+ev[1]+ev[2], ev[0]+ev[1]+ev[2]+ev[3]])
+
+# To capture 95% of the explained variance, use two principal components.
+
+K = 2
+
+print("First {K} princpal components:".format(K=K))
+print(pca.pc_directions[:,:K])
+PC = pca.transform(num_components=K)
