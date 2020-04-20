@@ -87,3 +87,34 @@ K = 2
 print("First {K} princpal components:".format(K=K))
 print(pca.pc_directions[:,:K])
 PC = pca.transform(num_components=K)
+datum = np.concatenate([X, PC], axis=1)
+
+correlations = np.corrcoef(datum.T)
+sns.heatmap((1-correlations)/2,
+            xticklabels=['sepal_length', 'sepal_width', 'petal_length',
+                         'petal_width', 'PC1', 'PC2'],
+            yticklabels=['sepal_length', 'sepal_width', 'petal_length',
+                         'petal_width', 'PC1', 'PC2'])
+plt.show()
+
+# =============================================================================
+# It looks like PC1 is weakly correlated with sepal_width, and strongly
+# anticorrelated with the other attributes, while PC2 is strongly correlated
+# with sepal_width, and not correlated with the other attributes.
+# =============================================================================
+
+colors = list(map(
+    lambda x: {'setosa':'r', 'versicolor':'g', 'virginica':'b'}[x],
+    data['species']))
+
+plt.subplot(121)
+plt.scatter(X[:, 0], X[:, 1], c=colors)
+plt.xlabel("x1"); plt.ylabel("x2")
+
+plt.subplot(122)
+plt.scatter(PC[:, 0], PC[:, 1], c=colors)
+plt.xlabel("PC1 (var=%.2f)" % pca.explained_variance_ratio_[0])
+plt.ylabel("PC2 (var=%.2f)" % pca.explained_variance_ratio_[1])
+plt.axis('equal')
+plt.tight_layout()
+plt.show()
