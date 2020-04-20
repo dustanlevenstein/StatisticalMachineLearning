@@ -61,3 +61,20 @@ print(data.describe())
 # 
 # Perhaps it doesn't need to be standardized, but it does need to be centered.
 # =============================================================================
+
+X = data[['sepal_length', 'sepal_width', 'petal_length',
+          'petal_width']].to_numpy()
+correlations = np.corrcoef(X.T)
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.heatmap((1-correlations)/2, xticklabels=['sepal_length', 'sepal_width',
+                                         'petal_length', 'petal_width'],
+            yticklabels=['sepal_length', 'sepal_width',
+                         'petal_length', 'petal_width'])
+plt.show()
+
+# =============================================================================
+# Observation: sepal_length, petal_length, and petal_width are strongly
+# correlated together, while sepal_width is somewhat negatively correlated with
+# the others.
+# =============================================================================
