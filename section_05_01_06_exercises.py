@@ -28,6 +28,10 @@ class BasicPCA(object):
         eigenvectors = np.flip(eigenvectors, axis=1)
         eigenvalues = np.flip(eigenvalues)
         
+        # An adjustment solely for the purpose of making this match the results
+        # of section_05_01_03.py.
+        eigenvectors[:,0] = -eigenvectors[:,0]
+        
         self.explained_variance_ratio_ = list(eigenvalues/eigenvalues.sum())
         self.pc_directions = eigenvectors
     def transform(self, X=None, num_components=None):
